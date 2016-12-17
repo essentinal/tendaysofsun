@@ -19,12 +19,15 @@ public class Inverter implements IRenderer, IUpdateable {
   private boolean blink = false;
 
   @Override
-  public void render(Graphics2D g, int x, int y, int width, int height,
-      float rotation) {
+  public void render(final Graphics2D g, final int x, final int y,
+      final int width, final int height, final float rotation) {
+
+    final int inverterCount = Upgrades.getInstance().getInverterPower()
+        .getLevel();
 
     // inverter input lines
-    for (int i = 0; i < Upgrades.getInstance().getInverterPower().level; i++) {
-      int j = 12 - Upgrades.getInstance().getInverterPower().level + i;
+    for (int i = 0; i < inverterCount; i++) {
+      final int j = 12 - inverterCount + i;
 
       g.fillRect(width - WIDTH * 3 / 2, SCPanel.GROUND_HEIGHT + (j + 1) * 4, 10,
           2);
@@ -53,7 +56,7 @@ public class Inverter implements IRenderer, IUpdateable {
   }
 
   @Override
-  public void update(float time) {
+  public void update(final float time) {
     this.time += time;
 
     if (this.time > 500) {

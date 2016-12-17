@@ -17,32 +17,31 @@ public class Bill implements IUpdateable, IRenderer, IncomeListener {
   private static final Color COLOR_TEXT_LESS = new Color(0.8f, 0.8f, 0.0f);
   private static final Color COLOR_TEXT_DANGER = new Color(1.0f, 0.0f, 0.0f);
 
+  private static final Color COLOR_BG = new Color(0.2f, 0.2f, 0.2f);
+  private static final Color COLOR_BG2 = new Color(0.1f, 0.1f, 0.1f);
+
+  private static final Font FONT = new Font("arial", Font.BOLD, 22);
+
   private int width = -1;
   private int height = -1;
 
   private GradientPaint paint;
-  private static final Color COLOR_BG = new Color(0.2f, 0.2f, 0.2f);
-  private static final Color COLOR_BG2 = new Color(0.1f, 0.1f, 0.1f);
 
   private int credits = 500;
 
   private int earnedCredits = 0;
-
-  private static final Font FONT = new Font("arial", Font.BOLD, 22);
-
-  public static final Bill INSTANCE = new Bill();
 
   private Bill() {
 
   }
 
   public static Bill getInstance() {
-    return INSTANCE;
+    return Holder.INSTANCE;
   }
 
   @Override
-  public void render(Graphics2D g, int x, int y, int width, int height,
-      float rotation) {
+  public void render(final Graphics2D g, final int x, final int y,
+      final int width, final int height, final float rotation) {
 
     if (this.width != width || this.height != height) {
       this.width = Math.max(width, 2);
@@ -52,7 +51,7 @@ public class Bill implements IUpdateable, IRenderer, IncomeListener {
           new Point(0, height), COLOR_BG);
 
     }
-    Paint p = g.getPaint();
+    final Paint p = g.getPaint();
     g.setPaint(paint);
 
     g.fillRect(40, height - 75, 180, 35);
@@ -71,21 +70,21 @@ public class Bill implements IUpdateable, IRenderer, IncomeListener {
 
     g.setFont(FONT);
 
-    String s = String.valueOf(credits);
+    final String s = String.valueOf(credits);
 
-    Rectangle2D rect = g.getFontMetrics().getStringBounds(s, g);
+    final Rectangle2D rect = g.getFontMetrics().getStringBounds(s, g);
     g.drawString(s, 200 - (int) rect.getWidth(), height - 50);
 
     g.setPaint(p);
   }
 
   @Override
-  public void update(float time) {
+  public void update(final float time) {
     // bill_amount += time;
   }
 
   @Override
-  public void creditsChanged(int amount) {
+  public void creditsChanged(final int amount) {
     credits += amount;
     if (amount > 0) {
       earnedCredits += amount;
@@ -98,5 +97,19 @@ public class Bill implements IUpdateable, IRenderer, IncomeListener {
 
   public int getEarnedCredits() {
     return earnedCredits;
+  }
+
+  /**
+   * This is a holder class for the single instance. It allows a threadsafe lazy
+   * initialization of the singleton.
+   * 
+   * @since 17.12.2016
+   * @author Stephan Dreyer
+   * 
+   * @see <a href=
+   *      "http://en.wikipedia.org/wiki/Initialization-on-demand_holder_idiom">Wikipedia</a>
+   */
+  private static final class Holder {
+    public static final Bill INSTANCE = new Bill();
   }
 }

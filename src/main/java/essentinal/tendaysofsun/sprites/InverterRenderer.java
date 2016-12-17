@@ -9,20 +9,17 @@ import java.awt.Point;
 import essentinal.tendaysofsun.interfaces.IRenderer;
 
 public class InverterRenderer implements IRenderer {
+  private static final Color COLOR_BG = new Color(0.9f, 0.9f, 0.9f);
+  private static final Color COLOR_BG2 = new Color(0.6f, 0.6f, 0.6f);
+
   private int width = -1;
   private int height = -1;
 
   private GradientPaint paint;
-  private static final Color COLOR_BG = new Color(0.9f, 0.9f, 0.9f);
-  private static final Color COLOR_BG2 = new Color(0.6f, 0.6f, 0.6f);
-
-  public InverterRenderer() {
-
-  }
 
   @Override
-  public void render(Graphics2D g, int x, int y, int width, int height,
-      float rotation) {
+  public void render(final Graphics2D g, final int x, final int y,
+      final int width, final int height, final float rotation) {
     if (this.width != width || this.height != height) {
       this.width = Math.max(width, 2);
       this.height = Math.max(height, 2);
@@ -31,10 +28,10 @@ public class InverterRenderer implements IRenderer {
           new Point(0, this.height / 2), COLOR_BG2);
 
     }
-    Paint p = g.getPaint();
+    final Paint p = g.getPaint();
 
-    int size = Math.min(width, height);
-    int diff = Math.max(width, height) - size;
+    final int size = Math.min(width, height);
+    final int diff = Math.max(width, height) - size;
 
     g.translate(x, y);
     g.setPaint(paint);

@@ -6,7 +6,7 @@ import java.awt.Rectangle;
 import essentinal.tendaysofsun.GameProperties;
 import essentinal.tendaysofsun.SCPanel;
 import essentinal.tendaysofsun.Upgrades;
-import essentinal.tendaysofsun.interfaces.IClickable;
+import essentinal.tendaysofsun.interfaces.IDraggableSprite;
 import essentinal.tendaysofsun.interfaces.IIntersectable;
 import essentinal.tendaysofsun.interfaces.IRenderer;
 import essentinal.tendaysofsun.interfaces.IUpdateable;
@@ -14,7 +14,7 @@ import essentinal.tendaysofsun.interfaces.IncomeListener;
 import essentinal.tendaysofsun.math.Vector2f;
 
 public class SolarPanel
-    implements IRenderer, IClickable, IIntersectable, IUpdateable {
+    implements IRenderer, IDraggableSprite, IIntersectable, IUpdateable {
   private final Vector2f pos;
   private final SolarPanelRenderer renderer = new SolarPanelRenderer();
 
@@ -110,7 +110,7 @@ public class SolarPanel
   }
 
   @Override
-  public boolean checkIntersection(final IIntersectable intersectable) {
+  public boolean isIntersection(final IIntersectable intersectable) {
     final Rectangle r1 = getRect();
     final Rectangle r2 = intersectable.getRect();
 

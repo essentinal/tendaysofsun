@@ -5,14 +5,14 @@ import java.awt.Rectangle;
 
 import essentinal.tendaysofsun.Level;
 import essentinal.tendaysofsun.SCPanel;
-import essentinal.tendaysofsun.interfaces.IClickable;
+import essentinal.tendaysofsun.interfaces.IDraggableSprite;
 import essentinal.tendaysofsun.interfaces.IDestroyable;
 import essentinal.tendaysofsun.interfaces.IIntersectable;
 import essentinal.tendaysofsun.interfaces.IRenderer;
 import essentinal.tendaysofsun.interfaces.IUpdateable;
 import essentinal.tendaysofsun.math.Vector2f;
 
-public class Cloud implements IRenderer, IClickable, IUpdateable, IDestroyable,
+public class Cloud implements IRenderer, IDraggableSprite, IUpdateable, IDestroyable,
     IIntersectable {
   private final Vector2f pos;
   private final CloudRenderer renderer = new CloudRenderer();
@@ -90,7 +90,7 @@ public class Cloud implements IRenderer, IClickable, IUpdateable, IDestroyable,
   }
 
   @Override
-  public boolean checkIntersection(final IIntersectable intersectable) {
+  public boolean isIntersection(final IIntersectable intersectable) {
     final Rectangle r1 = getRect();
     final Rectangle r2 = intersectable.getRect();
 

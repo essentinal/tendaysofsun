@@ -14,13 +14,9 @@ public class GroundRenderer implements IRenderer {
 
   private GradientPaint paint;
 
-  public GroundRenderer() {
-
-  }
-
   @Override
-  public void render(Graphics2D g, int x, int y, int width, int height,
-      float rotation) {
+  public void render(final Graphics2D g, final int x, final int y,
+      final int width, final int height, final float rotation) {
     if (this.width != width || this.height != height) {
       this.width = Math.max(width, 2);
       this.height = Math.max(height, 2);
@@ -30,7 +26,7 @@ public class GroundRenderer implements IRenderer {
           new Color(0.7f, 0.7f, 0.45f, 1.0f));
 
     }
-    Paint p = g.getPaint();
+    final Paint p = g.getPaint();
     g.setPaint(paint);
 
     g.translate(x, y);

@@ -44,7 +44,7 @@ public class GameProperties {
    * @see <a href=
    *      "http://en.wikipedia.org/wiki/Initialization-on-demand_holder_idiom">Wikipedia</a>
    */
-  private static class Holder {
+  private static final class Holder {
     public static final GameProperties INSTANCE = new GameProperties();
   }
 }

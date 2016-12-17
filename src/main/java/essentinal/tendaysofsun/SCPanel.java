@@ -18,7 +18,7 @@ import java.util.Random;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import essentinal.tendaysofsun.interfaces.IClickable;
+import essentinal.tendaysofsun.interfaces.IDraggableSprite;
 import essentinal.tendaysofsun.interfaces.IDestroyable;
 import essentinal.tendaysofsun.interfaces.IIntersectable;
 import essentinal.tendaysofsun.interfaces.IRenderer;
@@ -31,7 +31,7 @@ public abstract class SCPanel extends JPanel {
   protected ArrayList<IRenderer> objectRenderers = new ArrayList<IRenderer>();
   protected ArrayList<IRenderer> overlayRenderers = new ArrayList<IRenderer>();
   protected ArrayList<IRenderer> hudRenderers = new ArrayList<IRenderer>();
-  protected ArrayList<IClickable> clickables = new ArrayList<IClickable>();
+  protected ArrayList<IDraggableSprite> clickables = new ArrayList<IDraggableSprite>();
   protected ArrayList<IDestroyable> destroyables = new ArrayList<IDestroyable>();
   protected ArrayList<IIntersectable> intersectables = new ArrayList<IIntersectable>();
 
@@ -187,7 +187,7 @@ public abstract class SCPanel extends JPanel {
   }
 
   class SCMouseListener extends MouseAdapter {
-    private IClickable clickable;
+    private IDraggableSprite clickable;
 
     private int offX;
     private int offY;
@@ -200,7 +200,7 @@ public abstract class SCPanel extends JPanel {
 
     @Override
     public void mousePressed(final MouseEvent e) {
-      for (final IClickable c : clickables) {
+      for (final IDraggableSprite c : clickables) {
         if (c.contains(e.getX(), e.getY())) {
           setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
           clickable = c;

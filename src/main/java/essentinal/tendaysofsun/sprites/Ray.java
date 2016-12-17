@@ -43,7 +43,7 @@ public class Ray
       updateRect();
 
       for (final IIntersectable ii : intersectables) {
-        if (ii.checkIntersection(this)) {
+        if (ii.isIntersection(this)) {
           destroy = true;
           return;
         }
@@ -78,7 +78,7 @@ public class Ray
   }
 
   @Override
-  public boolean checkIntersection(final IIntersectable intersectable) {
-    return intersectable.checkIntersection(this);
+  public boolean isIntersection(final IIntersectable intersectable) {
+    return intersectable.isIntersection(this);
   }
 }

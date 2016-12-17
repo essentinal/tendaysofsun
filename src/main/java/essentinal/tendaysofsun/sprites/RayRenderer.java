@@ -17,21 +17,13 @@ public class RayRenderer implements IRenderer {
   private LinearGradientPaint paint;
   private Stroke stroke;
 
-  public RayRenderer() {
-  }
-
   @Override
-  public void render(Graphics2D g, int x, int y, int width, int height,
-      float angle) {
+  public void render(final Graphics2D g, final int x, final int y,
+      final int width, final int height, final float angle) {
     if (this.width != width || this.height != height) {
       this.width = Math.max(width, 2);
       this.height = Math.max(height, 2);
 
-      // paint = new RadialGradientPaint(new Point(this.width / 2, 0), width,
-      // new float[] { 0.0f, 0.3f, 0.5f }, new Color[] {
-      // new Color(1.0f, 1.0f, 0.5f, 1.0f),
-      // new Color(1.0f, 1.0f, 0.5f, 1.0f),
-      // new Color(0.9f, 0.9f, 0.0f, 0.0f) });
       paint = new LinearGradientPaint(new Point(-this.width / 2, 0),
           new Point(this.width / 2, 0),
           new float[] { 0.0f, 0.4f, 0.5f, 0.6f, 1.0f },
@@ -43,12 +35,12 @@ public class RayRenderer implements IRenderer {
           BasicStroke.JOIN_ROUND);
     }
 
-    Paint oldPaint = g.getPaint();
-    Stroke oldStroke = g.getStroke();
+    final Paint oldPaint = g.getPaint();
+    final Stroke oldStroke = g.getStroke();
     g.setPaint(paint);
 
-    int transX = Math.round(x - width / 2f);
-    int transY = Math.round(y - height / 2f);
+    final int transX = Math.round(x - width / 2f);
+    final int transY = Math.round(y - height / 2f);
 
     g.translate(transX, transY);
     g.rotate(-angle);

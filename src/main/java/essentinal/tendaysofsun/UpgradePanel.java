@@ -137,10 +137,11 @@ public class UpgradePanel extends JPanel {
     upgradeInverterButton.setEnabled(upgrades.getInverterPower().isUpgradeable()
         && upgrades.getInverterPower().nextLevel().price < credits);
 
-    cellCountLabel.setText(String.format("%2d", upgrades.getCellCount().level));
+    cellCountLabel
+        .setText(String.format("%2d", upgrades.getCellCount().getLevel()));
 
     inverterLevelLabel
-        .setText(String.format("%2d", upgrades.getInverterPower().level));
+        .setText(String.format("%2d", upgrades.getInverterPower().getLevel()));
 
     repaint();
   }

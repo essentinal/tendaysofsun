@@ -101,7 +101,7 @@ public class Level extends SCPanel {
   @Override
   protected void checkSunPos() {
     if (sun.getPosition().x > SCPanel.PANEL_WIDTH + 100) {
-      levelChanger.nextLevel();
+      levelChanger.startNextLevel();
     }
   }
 }

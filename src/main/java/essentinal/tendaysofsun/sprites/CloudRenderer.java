@@ -14,13 +14,9 @@ public class CloudRenderer implements IRenderer {
 
   private GradientPaint paint;
 
-  public CloudRenderer() {
-
-  }
-
   @Override
-  public void render(Graphics2D g, int x, int y, int width, int height,
-      float rotation) {
+  public void render(final Graphics2D g, final int x, final int y,
+      final int width, final int height, final float rotation) {
     if (this.width != width || this.height != height) {
       this.width = Math.max(width, 2);
       this.height = Math.max(height, 2);
@@ -30,7 +26,7 @@ public class CloudRenderer implements IRenderer {
           new Color(0.5f, 0.5f, 1.0f, 1.0f));
 
     }
-    Paint p = g.getPaint();
+    final Paint p = g.getPaint();
     g.setPaint(paint);
 
     g.translate(x, y);
@@ -39,7 +35,7 @@ public class CloudRenderer implements IRenderer {
     g.fillOval(70, 0, 50, 50);
     g.fillOval(40, 0, 50, 50);
     g.fillOval(60, 20, 50, 50);
-    // g.fillRect(0, 0, width, height);
+
     g.translate(-x, -y);
 
     g.setPaint(p);

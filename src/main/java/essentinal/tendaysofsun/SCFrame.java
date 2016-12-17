@@ -18,7 +18,7 @@ import essentinal.tendaysofsun.interfaces.ILevelChanger;
 import essentinal.tendaysofsun.sprites.Bill;
 
 @SuppressWarnings("serial")
-public class SCFrame extends JFrame implements ILevelChanger {
+public final class SCFrame extends JFrame implements ILevelChanger {
   private Level level;
 
   private int days = 0;
@@ -46,7 +46,7 @@ public class SCFrame extends JFrame implements ILevelChanger {
       }
     });
 
-    nextLevel();
+    startNextLevel();
   }
 
   @Override
@@ -68,7 +68,7 @@ public class SCFrame extends JFrame implements ILevelChanger {
   }
 
   @Override
-  public void nextLevel() {
+  public void startNextLevel() {
     if (level != null) {
       level.stop();
       remove(level);
@@ -111,7 +111,7 @@ public class SCFrame extends JFrame implements ILevelChanger {
 
       @Override
       public void actionPerformed(final ActionEvent e) {
-        nextLevel();
+        startNextLevel();
       }
     });
 
