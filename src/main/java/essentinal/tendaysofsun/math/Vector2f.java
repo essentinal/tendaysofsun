@@ -1,6 +1,6 @@
 package essentinal.tendaysofsun.math;
 
-public class Vector2f {
+public final class Vector2f {
   private float x;
   private float y;
 
@@ -42,12 +42,14 @@ public class Vector2f {
   }
 
   public Vector2f normalizeLocal() {
-    final float length = getLength();
-    if (length != 0) {
-      return divideLocal(length);
+    if (x != 0f || y != 0f) {
+      final float length = getLength();
+      if (length != 1f) {
+        return divideLocal(length);
+      }
     }
 
-    return divideLocal(1);
+    return this;
   }
 
   public float getLength() {
@@ -58,5 +60,16 @@ public class Vector2f {
     x /= scalar;
     y /= scalar;
     return this;
+  }
+
+  @Override
+  public boolean equals(final Object o) {
+    if (o instanceof Vector2f) {
+      final Vector2f that = (Vector2f) o;
+
+      return that.x == this.x && that.y == this.y;
+    }
+
+    return false;
   }
 }
