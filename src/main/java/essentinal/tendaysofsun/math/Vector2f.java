@@ -1,10 +1,10 @@
 package essentinal.tendaysofsun.math;
 
 public class Vector2f {
-  public float x;
-  public float y;
+  private float x;
+  private float y;
 
-  public Vector2f(float x, float y) {
+  public Vector2f(final float x, final float y) {
     this.x = x;
     this.y = y;
   }
@@ -13,29 +13,48 @@ public class Vector2f {
     return (float) Math.atan2(x, y);
   }
 
-  public void add(Vector2f vec) {
-    this.x += vec.x;
-    this.y += vec.y;
+  public float getX() {
+    return x;
   }
 
-  public Vector2f scale(float scale) {
+  public float getY() {
+    return y;
+  }
+
+  public Vector2f setX(final float x) {
+    this.x = x;
+    return this;
+  }
+
+  public Vector2f setY(final float y) {
+    this.y = y;
+    return this;
+  }
+
+  public Vector2f addLocal(final Vector2f vec) {
+    this.x += vec.x;
+    this.y += vec.y;
+    return this;
+  }
+
+  public Vector2f scale(final float scale) {
     return new Vector2f(x * scale, y * scale);
   }
 
-  public Vector2f normalize() {
-    float length = length();
+  public Vector2f normalizeLocal() {
+    final float length = getLength();
     if (length != 0) {
-      return divide(length);
+      return divideLocal(length);
     }
 
-    return divide(1);
+    return divideLocal(1);
   }
 
-  public float length() {
+  public float getLength() {
     return (float) Math.sqrt(x * x + y * y);
   }
 
-  public Vector2f divide(float scalar) {
+  public Vector2f divideLocal(final float scalar) {
     x /= scalar;
     y /= scalar;
     return this;

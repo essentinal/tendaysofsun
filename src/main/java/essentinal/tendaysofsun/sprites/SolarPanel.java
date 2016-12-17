@@ -15,8 +15,6 @@ import essentinal.tendaysofsun.math.Vector2f;
 
 public class SolarPanel
     implements IRenderer, IDraggableSprite, IIntersectable, IUpdateable {
-  private final Vector2f pos;
-  private final SolarPanelRenderer renderer = new SolarPanelRenderer();
 
   public static final int WIDTH = 64;
   public static final int HEIGHT = 50;
@@ -27,6 +25,9 @@ public class SolarPanel
       .getInt("ray_income");
   private static final int costs_per_second = GameProperties.getInstance()
       .getInt("costs_per_second");
+
+  private final Vector2f pos;
+  private final SolarPanelRenderer renderer = new SolarPanelRenderer();
 
   private IncomeListener listener;
 
@@ -53,8 +54,8 @@ public class SolarPanel
   public void render(final Graphics2D g, final int x, final int y, final int w,
       final int h, final float rotation) {
     for (int i = 0; i < Upgrades.getInstance().getCellCount().count; i++) {
-      renderer.render(g, (int) pos.x + (i * WIDTH), (int) pos.y, WIDTH - 1,
-          HEIGHT, rotation);
+      renderer.render(g, (int) pos.getX() + (i * WIDTH), (int) pos.getY(),
+          WIDTH - 1, HEIGHT, rotation);
     }
   }
 
@@ -74,23 +75,19 @@ public class SolarPanel
   }
 
   private void updateRect() {
-    rect.setBounds((int) pos.x, (int) pos.y, getTotalWidth(),
+    rect.setBounds((int) pos.getX(), (int) pos.getY(), getTotalWidth(),
         SolarPanel.CELL_HEIGHT / 2);
   }
 
   @Override
   public boolean contains(final int x, final int y) {
-    return new Rectangle((int) pos.x, (int) pos.y, getTotalWidth(), HEIGHT)
-        .contains(x, y);
+    return new Rectangle((int) pos.getX(), (int) pos.getY(), getTotalWidth(),
+        HEIGHT).contains(x, y);
   }
 
   @Override
   public void dragged(final int x, final int y) {
-    // this prevents the user from moving the panel too fast
-    // int diff = (int) Math.min(Math.max(x - pos.x, -50), 50);
-    // x = (int) (pos.x + diff);
-
-    pos.x = Math.max(Math.min(x, SCPanel.PANEL_WIDTH - getTotalWidth()), 0);
+    pos.setX(Math.max(Math.min(x, SCPanel.PANEL_WIDTH - getTotalWidth()), 0));
 
     updateRect();
   }

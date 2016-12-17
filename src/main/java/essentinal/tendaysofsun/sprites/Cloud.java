@@ -5,15 +5,15 @@ import java.awt.Rectangle;
 
 import essentinal.tendaysofsun.Level;
 import essentinal.tendaysofsun.SCPanel;
-import essentinal.tendaysofsun.interfaces.IDraggableSprite;
 import essentinal.tendaysofsun.interfaces.IDestroyable;
+import essentinal.tendaysofsun.interfaces.IDraggableSprite;
 import essentinal.tendaysofsun.interfaces.IIntersectable;
 import essentinal.tendaysofsun.interfaces.IRenderer;
 import essentinal.tendaysofsun.interfaces.IUpdateable;
 import essentinal.tendaysofsun.math.Vector2f;
 
-public class Cloud implements IRenderer, IDraggableSprite, IUpdateable, IDestroyable,
-    IIntersectable {
+public class Cloud implements IRenderer, IDraggableSprite, IUpdateable,
+    IDestroyable, IIntersectable {
   private final Vector2f pos;
   private final CloudRenderer renderer = new CloudRenderer();
 
@@ -40,8 +40,8 @@ public class Cloud implements IRenderer, IDraggableSprite, IUpdateable, IDestroy
 
   @Override
   public void update(final float time) {
-    if (pos.x <= SCPanel.PANEL_WIDTH + WIDTH && pos.x >= -WIDTH) {
-      pos.add(dirVec.scale(Level.currentDay.cloudSpeed * time));
+    if (pos.getX() <= SCPanel.PANEL_WIDTH + WIDTH && pos.getX() >= -WIDTH) {
+      pos.addLocal(dirVec.scale(Level.currentDay.cloudSpeed * time));
 
       updateRect();
     } else {
@@ -52,20 +52,21 @@ public class Cloud implements IRenderer, IDraggableSprite, IUpdateable, IDestroy
   @Override
   public void render(final Graphics2D g, final int x, final int y, final int w,
       final int h, final float rotation) {
-    renderer.render(g, (int) pos.x, (int) pos.y, WIDTH, HEIGHT, rotation);
+    renderer.render(g, (int) pos.getX(), (int) pos.getY(), WIDTH, HEIGHT,
+        rotation);
   }
 
   @Override
   public boolean contains(final int x, final int y) {
-    return new Rectangle((int) pos.x, (int) pos.y, WIDTH, HEIGHT).contains(x,
-        y);
+    return new Rectangle((int) pos.getX(), (int) pos.getY(), WIDTH, HEIGHT)
+        .contains(x, y);
   }
 
   @Override
   public void dragged(final int x, final int y) {
     final float newX = Math.max(Math.min(x, SCPanel.PANEL_WIDTH), -WIDTH);
-    dirVec.x = (newX - pos.x) / 5f;
-    pos.x = newX;
+    dirVec.setX((newX - pos.getX()) / 5f);
+    pos.setX(newX);
 
     updateRect();
   }
@@ -81,7 +82,7 @@ public class Cloud implements IRenderer, IDraggableSprite, IUpdateable, IDestroy
   }
 
   private void updateRect() {
-    rect.setBounds((int) pos.x, (int) pos.y, WIDTH, HEIGHT);
+    rect.setBounds((int) pos.getX(), (int) pos.getY(), WIDTH, HEIGHT);
   }
 
   @Override

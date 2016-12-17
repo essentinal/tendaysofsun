@@ -73,9 +73,10 @@ public class Level extends SCPanel {
   protected void createRay() {
     if (random.nextBoolean()) {
 
-      final Ray ray = new Ray(sun.getPosition().x, sun.getPosition().y,
+      final Ray ray = new Ray(sun.getPosition().getX(),
+          sun.getPosition().getY(),
           new Vector2f((random.nextFloat() - .5f) * day.raySpread,
-              Math.abs(random.nextFloat() - .1f * day.raySpread)).normalize(),
+              Math.abs(random.nextFloat() - .1f * day.raySpread)).normalizeLocal(),
           intersectables);
       objectRenderers.add(1, ray);
       updateables.add(ray);
@@ -100,7 +101,7 @@ public class Level extends SCPanel {
 
   @Override
   protected void checkSunPos() {
-    if (sun.getPosition().x > SCPanel.PANEL_WIDTH + 100) {
+    if (sun.getPosition().getX() > SCPanel.PANEL_WIDTH + 100) {
       levelChanger.startNextLevel();
     }
   }
