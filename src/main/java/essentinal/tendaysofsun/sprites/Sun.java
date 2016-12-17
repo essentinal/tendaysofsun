@@ -22,7 +22,7 @@ public class Sun implements IUpdateable, IRenderer {
 
   @Override
   public void update(final float time) {
-    pos.add(dirVec.scale(sunSpeed * time));
+    pos.addLocal(dirVec.scale(sunSpeed * time));
   }
 
   @Override

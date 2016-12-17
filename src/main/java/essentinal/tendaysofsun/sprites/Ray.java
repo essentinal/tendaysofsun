@@ -41,7 +41,7 @@ public class Ray
   @Override
   public void update(final float time) {
     if (pos.getY() + HEIGHT < SCPanel.GROUND_HEIGHT && !destroy) {
-      pos.add(dirVec.scale(Level.currentDay.raySpeed * time));
+      pos.addLocal(dirVec.scale(Level.currentDay.raySpeed * time));
       updateRect();
 
       for (final IIntersectable ii : intersectables) {

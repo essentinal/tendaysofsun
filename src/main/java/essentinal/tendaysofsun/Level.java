@@ -76,7 +76,7 @@ public class Level extends SCPanel {
       final Ray ray = new Ray(sun.getPosition().getX(),
           sun.getPosition().getY(),
           new Vector2f((random.nextFloat() - .5f) * day.raySpread,
-              Math.abs(random.nextFloat() - .1f * day.raySpread)).normalize(),
+              Math.abs(random.nextFloat() - .1f * day.raySpread)).normalizeLocal(),
           intersectables);
       objectRenderers.add(1, ray);
       updateables.add(ray);

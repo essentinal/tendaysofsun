@@ -41,7 +41,7 @@ public class Cloud implements IRenderer, IDraggableSprite, IUpdateable,
   @Override
   public void update(final float time) {
     if (pos.getX() <= SCPanel.PANEL_WIDTH + WIDTH && pos.getX() >= -WIDTH) {
-      pos.add(dirVec.scale(Level.currentDay.cloudSpeed * time));
+      pos.addLocal(dirVec.scale(Level.currentDay.cloudSpeed * time));
 
       updateRect();
     } else {
