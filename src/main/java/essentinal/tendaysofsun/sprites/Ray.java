@@ -2,7 +2,7 @@ package essentinal.tendaysofsun.sprites;
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.util.ArrayList;
+import java.util.List;
 
 import essentinal.tendaysofsun.Level;
 import essentinal.tendaysofsun.SCPanel;
@@ -14,21 +14,23 @@ import essentinal.tendaysofsun.math.Vector2f;
 
 public class Ray
     implements IUpdateable, IRenderer, IDestroyable, IIntersectable {
+
+  private static final int HEIGHT = 20;
+  private static final int WIDTH = 8;
+
   private final RayRenderer renderer = new RayRenderer();
   private final Vector2f pos;
 
   private final Vector2f dirVec;
 
-  private boolean destroy = false;
-  private final static int HEIGHT = 20;
-  private final static int WIDTH = 8;
+  private boolean destroy;
 
   private final Rectangle rect = new Rectangle();
 
-  private final ArrayList<IIntersectable> intersectables;
+  private final List<IIntersectable> intersectables;
 
   public Ray(final float xPos, final float yPos, final Vector2f direction,
-      final ArrayList<IIntersectable> intersectables) {
+      final List<IIntersectable> intersectables) {
     this.pos = new Vector2f(xPos, yPos);
     this.dirVec = direction;
     this.intersectables = intersectables;
@@ -38,7 +40,7 @@ public class Ray
 
   @Override
   public void update(final float time) {
-    if (pos.y + HEIGHT < SCPanel.GROUND_HEIGHT && !destroy) {
+    if (pos.getY() + HEIGHT < SCPanel.GROUND_HEIGHT && !destroy) {
       pos.add(dirVec.scale(Level.currentDay.raySpeed * time));
       updateRect();
 
@@ -55,7 +57,8 @@ public class Ray
   }
 
   private void updateRect() {
-    rect.setBounds((int) pos.x - WIDTH, (int) pos.y, WIDTH, HEIGHT / 2);
+    rect.setBounds((int) pos.getX() - WIDTH, (int) pos.getY(), WIDTH,
+        HEIGHT / 2);
   }
 
   @Override
@@ -64,7 +67,8 @@ public class Ray
     final float angle = dirVec.getAngle();
 
     g = (Graphics2D) g.create(x, y, width, height);
-    renderer.render(g, (int) pos.x, (int) pos.y, WIDTH, HEIGHT, angle);
+    renderer.render(g, (int) pos.getX(), (int) pos.getY(), WIDTH, HEIGHT,
+        angle);
   }
 
   @Override

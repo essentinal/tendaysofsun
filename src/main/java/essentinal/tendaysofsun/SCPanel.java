@@ -18,8 +18,8 @@ import java.util.Random;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import essentinal.tendaysofsun.interfaces.IDraggableSprite;
 import essentinal.tendaysofsun.interfaces.IDestroyable;
+import essentinal.tendaysofsun.interfaces.IDraggableSprite;
 import essentinal.tendaysofsun.interfaces.IIntersectable;
 import essentinal.tendaysofsun.interfaces.IRenderer;
 import essentinal.tendaysofsun.interfaces.IUpdateable;
@@ -204,8 +204,8 @@ public abstract class SCPanel extends JPanel {
         if (c.contains(e.getX(), e.getY())) {
           setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
           clickable = c;
-          offX = (int) (e.getX() - c.getPosition().x);
-          offY = (int) (e.getY() - c.getPosition().y);
+          offX = (int) (e.getX() - c.getPosition().getX());
+          offY = (int) (e.getY() - c.getPosition().getY());
           return;
         }
       }

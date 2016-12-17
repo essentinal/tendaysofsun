@@ -29,11 +29,8 @@ public class Sun implements IUpdateable, IRenderer {
   public void render(final Graphics2D g, final int x, final int y,
       final int width, final int height, final float rotation) {
     final int radius = Math.min(width, height) / 5;
-    // int sunP = (int) (width * (xPosition * 1.3d - 0.2d));
-    //
-    // int sunY = height / 8;
-
-    sunRenderer.render(g, (int) pos.x, (int) pos.y, radius, radius, rotation);
+    sunRenderer.render(g, (int) pos.getX(), (int) pos.getY(), radius, radius,
+        rotation);
   }
 
   public Vector2f getPosition() {
